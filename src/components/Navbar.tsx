@@ -1,12 +1,12 @@
 import Link from "next/link";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import { buttonVariants } from "./ui/button";
-import { ArrowRight } from "lucide-react";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { ArrowRight, Eye } from "lucide-react";
+// import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
-const Navbar = async () => {
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
+const Navbar = async ({ handleShowModal }: { handleShowModal: () => void }) => {
+  // const { getUser } = getKindeServerSession();
+  const user = "";
 
   const isAdmin = user?.email === process.env.ADMIN_EMAIL;
 
@@ -55,23 +55,13 @@ const Navbar = async () => {
             ) : (
               <>
                 <Link
-                  href="/api/auth/register"
+                  href="/fireAuth/login"
                   className={buttonVariants({
                     size: "sm",
                     variant: "ghost",
                   })}
                 >
-                  Sign Up
-                </Link>
-
-                <Link
-                  href="/api/auth/login"
-                  className={buttonVariants({
-                    size: "sm",
-                    variant: "ghost",
-                  })}
-                >
-                  LogIn
+                  Log In
                 </Link>
 
                 <div className="h-8 w-px bg-zinc-200 hidden sm:block" />
@@ -85,6 +75,17 @@ const Navbar = async () => {
                 >
                   Create Blix
                   <ArrowRight className="ml-1.5 h-5 w-5" />
+                </Link>
+                <Link
+                  href="/configure/upload"
+                  className={buttonVariants({
+                    size: "sm",
+                    className:
+                      "bg-neutral-100 text-zinc-800 hover:text-neutral-100 hidden sm:flex items-center gap-1",
+                  })}
+                >
+                  <Eye className="ml-1.5 h-5 w-5" />
+                  View Blix
                 </Link>
               </>
             )}

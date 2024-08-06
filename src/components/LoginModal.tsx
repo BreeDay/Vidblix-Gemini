@@ -1,29 +1,64 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
+import { auth } from "../lib/firebase/clientApp";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+
 const LoginModal = () => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
+
+  const handleSignIn = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    let email = e.currentTarget.email.value;
+    let password = e.currentTarget.password.value;
+
+    setLoading(true);
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        console.log(userCredential);
+        router.push("/configure/upload");
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+
+  const handleSignUp = () => {
+    let email = document.getElementsByName("email")[0] as HTMLInputElement;
+    let password = document.getElementsByName(
+      "password"
+    )[0] as HTMLInputElement;
+
+    setLoading(true);
+
+    createUserWithEmailAndPassword(auth, email.value, password.value)
+      .then((userCredential) => {
+        // Signed up
+        const user = userCredential.user;
+        setLoading(false);
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+        router.push("/configure/upload");
+        setLoading(false);
+        // ..
+      });
+  };
   return (
     <div className="w-full h-full absolute top-0 backdrop-filter backdrop-brightness-75 backdrop-blur-md flex justify-center items-center">
       <div className="relative bg-white rounded-lg shadow px-16">
-        <button
-          type="button"
-          className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center popup-close"
-        >
-          <svg
-            aria-hidden="true"
-            className="w-5 h-5"
-            fill="#c6c7c7"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-              clipRule="evenodd"
-            ></path>
-          </svg>
-          <span className="sr-only">Close popup</span>
-        </button>
-
         <div className="p-5">
           <h3 className="text-2xl mb-0.5 font-medium"></h3>
           <p className="mb-4 text-sm font-normal text-gray-800"></p>
@@ -56,7 +91,7 @@ const LoginModal = () => {
             <div className="h-px w-full bg-slate-200"></div>
           </div>
 
-          <form className="w-full">
+          <form className="w-full" onSubmit={handleSignIn}>
             <label htmlFor="email" className="sr-only">
               Email address
             </label>
@@ -89,6 +124,7 @@ const LoginModal = () => {
             </p>
             <button
               type="submit"
+              // onClick={handleSignIn}
               className="inline-flex w-full items-center justify-center rounded-lg bg-black p-2 py-3 text-sm font-medium text-white outline-none focus:ring-2 focus:ring-black focus:ring-offset-1 disabled:bg-gray-400"
             >
               Continue
@@ -97,9 +133,14 @@ const LoginModal = () => {
 
           <div className="mt-6 text-center text-sm text-slate-600">
             Don&apos;t have an account? <br />
-            <a href="/signup" className="font-medium text-[#4285f4]">
-              Sign up
-            </a>
+            <button
+              type="button"
+              className="font-medium text-[#4285f4]"
+              onClick={handleSignUp}
+            >
+              Sign Up
+            </button>
+            <p className="text-center">{loading ? "Signing in..." : ""}</p>
           </div>
         </div>
       </div>

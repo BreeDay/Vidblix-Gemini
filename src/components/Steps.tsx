@@ -53,9 +53,8 @@ const Steps = () => {
                   "flex items-center px-6 py-4 text-sm font-medium"
                 )}
               >
-                {/* <span className="flex-shrink-0">
-                  <img
-                    src={imgPath}
+                <span className="flex-shrink-0">
+                  <span
                     className={cn(
                       "flex h-20 w-20 object-contain items-center justify-center",
                       {
@@ -64,7 +63,7 @@ const Steps = () => {
                       }
                     )}
                   />
-                </span> */}
+                </span>
 
                 <span className="ml-4 h-full mt-0.5 flex min-w-0 flex-col justify-center">
                   <span

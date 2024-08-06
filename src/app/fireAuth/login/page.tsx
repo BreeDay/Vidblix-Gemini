@@ -7,9 +7,7 @@ const Login = () => {
   const handleShowModal = () => {
     setShowModal(!showModal);
   };
-  return (
-    <div>{showModal && <LoginModal handleShowModal={handleShowModal} />}</div>
-  );
+  return <div>{showModal && <LoginModal />}</div>;
 };
 export default Login;
 console.log("Login Modal");

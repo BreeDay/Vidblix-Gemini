@@ -1,13 +1,22 @@
+"use client";
 import Link from "next/link";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import { buttonVariants } from "./ui/button";
 import { ArrowRight, Eye } from "lucide-react";
-// import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import useAuth from "@/lib/hooks/useAuth";
+import { signOut } from "firebase/auth";
+import { auth } from "@/lib/firebase/clientApp";
+import { useRouter } from "next/navigation";
 
-const Navbar = async ({ handleShowModal }: { handleShowModal: () => void }) => {
+const Navbar = () => {
   // const { getUser } = getKindeServerSession();
-  const user = "";
+  const user = useAuth();
+  const router = useRouter();
 
+  const handleSignOut = async () => {
+    await signOut(auth);
+    router.push("/");
+  };
   const isAdmin = user?.email === process.env.ADMIN_EMAIL;
 
   return (
@@ -21,15 +30,15 @@ const Navbar = async ({ handleShowModal }: { handleShowModal: () => void }) => {
           <div className="h-full flex items-center space-x-4">
             {user ? (
               <>
-                <Link
-                  href="/api/auth/logout"
+                <button
+                  onClick={handleSignOut}
                   className={buttonVariants({
                     size: "sm",
                     variant: "ghost",
                   })}
                 >
                   Sign out
-                </Link>
+                </button>
                 {isAdmin ? (
                   <Link
                     href="/dashboard"

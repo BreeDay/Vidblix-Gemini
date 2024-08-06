@@ -34,7 +34,7 @@ const Page = () => {
 
     toast({
       title: `${file.file.type} type is not supported.`,
-      description: "Please choose a PNG, JPG, or JPEG image instead.",
+      description: "Please choose a GLTF file instead.",
       variant: "destructive",
     });
   };
@@ -64,6 +64,7 @@ const Page = () => {
             "image/png": [".png"],
             "image/jpeg": [".jpeg"],
             "image/jpg": [".jpg"],
+            "image/gltf": [".gltf"],
           }}
           onDragEnter={() => setIsDragOver(true)}
           onDragLeave={() => setIsDragOver(false)}

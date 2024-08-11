@@ -3,7 +3,6 @@
 import { Icons } from "@/components/Icons";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import Phone from "@/components/Phone";
-import { Reviews } from "@/components/Reviews";
 import { buttonVariants } from "@/components/ui/button";
 import { ArrowRight, Component, Check, LucideIcon } from "lucide-react";
 import { Canvas } from "@react-three/fiber";

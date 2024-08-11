@@ -60,12 +60,7 @@ const Page = () => {
         <Dropzone
           onDropRejected={onDropRejected}
           onDropAccepted={onDropAccepted}
-          accept={{
-            "image/png": [".png"],
-            "image/jpeg": [".jpeg"],
-            "image/jpg": [".jpg"],
-            "image/gltf": [".gltf"],
-          }}
+          accept={{}}
           onDragEnter={() => setIsDragOver(true)}
           onDragLeave={() => setIsDragOver(false)}
         >

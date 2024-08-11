@@ -6,7 +6,9 @@ import { db } from "@/db";
 const f = createUploadthing();
 
 export const ourFileRouter = {
-  imageUploader: f({ image: { maxFileSize: "4MB" } })
+  imageUploader: f({
+    blob: { maxFileSize: "10MB", maxFileCount: 1 },
+  })
     .input(z.object({ configId: z.string().optional() }))
     .middleware(async ({ input }) => {
       return { input };
@@ -17,15 +19,10 @@ export const ourFileRouter = {
       const res = await fetch(file.url);
       const buffer = await res.arrayBuffer();
 
-      const imgMetadata = await sharp(buffer).metadata();
-      const { width, height } = imgMetadata;
-
       if (!configId) {
         const configuration = await db.configuration.create({
           data: {
             imageUrl: file.url,
-            height: height || 500,
-            width: width || 500,
           },
         });
 

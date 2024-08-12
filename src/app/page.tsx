@@ -30,7 +30,7 @@ export default function Home() {
                 In Minutes!
               </h1>
               <p className="mt-8 text-lg lg:pr-10 max-w-prose text-center lg:text-left text-balance md:text-wrap">
-                Create Custom Animations With{" "}
+                Create Custom Experiences With{" "}
                 <span className="font-semibold">3D Model Ineractions</span> For
                 Education & Entertainment Purposes.
               </p>

@@ -85,7 +85,7 @@ const Navbar = () => {
                   Create Blix
                   <ArrowRight className="ml-1.5 h-5 w-5" />
                 </Link>
-                <Link
+                {/* <Link
                   href="/configure/upload"
                   className={buttonVariants({
                     size: "sm",
@@ -95,7 +95,7 @@ const Navbar = () => {
                 >
                   <Eye className="ml-1.5 h-5 w-5" />
                   View Blix
-                </Link>
+                </Link> */}
               </>
             )}
           </div>

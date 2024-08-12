@@ -24,7 +24,7 @@ export default function Home() {
               <h1 className="relative w-fit tracking-tight text-balance mt-16 font-bold !leading-tight text-gray-900 text-5xl md:text-6xl lg:text-7xl">
                 Generate <br />
                 <span className="bg-orange-400 px-2 text-white">
-                  AI Animations
+                  Interactive Videos
                 </span>{" "}
                 <br />
                 In Minutes!

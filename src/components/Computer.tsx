@@ -39,7 +39,7 @@ export default function Computer() {
           <primitive
             object={computer.scene}
             position={[1, -1.2, -0.4]}
-            scale={1.95}
+            scale={0.91}
             rotation-x={0.13}
           >
             {/* <Html

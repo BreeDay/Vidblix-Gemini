@@ -15,8 +15,8 @@ const STEPS = [
     url: "/design",
   },
   {
-    name: "Step 3: Review and Share",
-    description: "Review Your Blix and Share With Friends",
+    name: "Step 3: Share Blix",
+    description: "Share Your Blix With Friends",
     url: "/preview",
   },
 ];
